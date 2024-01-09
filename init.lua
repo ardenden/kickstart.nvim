@@ -128,10 +128,16 @@ require("lazy").setup({
     },
 
     {
-        -- Set lualine as statusline
         "nvim-lualine/lualine.nvim",
-        -- See `:help lualine.txt`
         config = function()
+            local function show_macro_recording()
+                local recording_register = vim.fn.reg_recording()
+                if recording_register == "" then
+                    return ""
+                else
+                    return "recording @" .. recording_register
+                end
+            end
             require("lualine").setup({
                 options = {
                     icons_enabled = true,
@@ -142,8 +148,7 @@ require("lazy").setup({
                 sections = {
                     lualine_x = {
                         {
-                            require("noice").api.statusline.mode.get,
-                            cond = require("noice").api.statusline.mode.has,
+                            show_macro_recording,
                             color = { fg = "#ff9e64" },
                         },
                         "encoding",
