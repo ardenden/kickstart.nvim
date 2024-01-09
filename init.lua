@@ -476,48 +476,26 @@ vim.defer_fn(function()
 end, 0)
 
 -- [[ Configure LSP ]]
---  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
-    -- NOTE: Remember that lua is a real programming language, and as such it is possible
-    -- to define small helper and utility functions so you don't have to repeat yourself
-    -- many times.
-    --
-    -- In this case, we create a function that lets us more easily define mappings specific
-    -- for LSP related items. It sets the mode, buffer and description for us each time.
-    local nmap = function(keys, func, desc)
-        if desc then
-            desc = "LSP: " .. desc
-        end
+local on_attach = function()
+    vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, { desc = "go to definition" })
+    vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, { desc = "go to references" })
+    vim.keymap.set("n", "gI", require("telescope.builtin").lsp_implementations, { desc = "go to Implementation" })
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "go to Declaration" })
 
-        vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
-    end
+    vim.keymap.set("n", "<leader>ld", require("telescope.builtin").lsp_type_definitions, { desc = "type definition" })
+    vim.keymap.set("n", "<leader>ls", require("telescope.builtin").lsp_document_symbols, { desc = "document symbols" })
+    vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "rename" })
+    vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "action" })
 
-    nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-    nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-
-    nmap("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-    nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-    nmap("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-    nmap("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-    nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
-    nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
-
-    -- See `:help K` for why this keymap
-    nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-    nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
-
-    -- Lesser used LSP functionality
-    nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-    nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
-    nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
-    nmap("<leader>wl", function()
+    vim.keymap.set("n", "<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, { desc = "symbols" })
+    vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, { desc = "add folder" })
+    vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, { desc = "remove folder" })
+    vim.keymap.set("n", "<leader>wl", function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, "[W]orkspace [L]ist Folders")
+    end, { desc = "list folders" })
 
-    -- Create a command `:Format` local to the LSP buffer
-    vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
-        vim.lsp.buf.format()
-    end, { desc = "Format current buffer with LSP" })
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover Documentation" })
+    vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Documentation" })
 end
 
 -- document existing key chains
@@ -526,13 +504,12 @@ require("which-key").register({
     ["<leader>f"] = { name = "find", _ = "which_key_ignore" },
     ["<leader>s"] = { name = "search", _ = "which_key_ignore" },
     ["<leader>h"] = { name = "highlight toggle", _ = "which_key_ignore" },
-    ["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
+    ["<leader>l"] = { name = "lsp", _ = "which_key_ignore" },
+    ["<leader>w"] = { name = "workspace", _ = "which_key_ignore" },
     ["<leader>d"] = { name = "[D]ocument", _ = "which_key_ignore" },
-    ["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
-    ["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
 })
+
 -- register which-key VISUAL mode
--- required for visual <leader>hs (hunk stage) to work
 require("which-key").register({
     ["<leader>"] = { name = "VISUAL <leader>" },
     ["<leader>g"] = { "hunk" },
