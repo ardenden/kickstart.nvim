@@ -41,6 +41,7 @@ return {
             "nvim-telescope/telescope.nvim", -- optional
         },
         config = true,
+        vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<cr>", { desc = "Neogit" }),
     },
 
     {
