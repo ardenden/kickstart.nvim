@@ -345,6 +345,9 @@ vim.defer_fn(function()
             "vim",
             "bash",
         },
+        sync_install = false,
+        ignore_install = {},
+        modules = {},
 
         -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
         auto_install = false,
