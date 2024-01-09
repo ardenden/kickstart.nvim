@@ -275,6 +275,11 @@ require("telescope").setup({
         buffers = {
             initial_mode = "normal",
             sort_lastused = true,
+            mappings = {
+                n = {
+                    ["dd"] = require("telescope.actions").delete_buffer,
+                },
+            },
         },
     },
 })
@@ -364,8 +369,17 @@ vim.keymap.set("n", "<leader>ss", require("telescope.builtin").live_grep, { desc
 vim.keymap.set("n", "<leader>sb", require("telescope.builtin").current_buffer_fuzzy_find, { desc = "buffer" })
 vim.keymap.set("n", "<leader>so", telescope_live_grep_open_files, { desc = "open" })
 vim.keymap.set("n", "<leader>sg", ":LiveGrepGitRoot<cr>", { desc = "git root" })
--- Buffer
-vim.keymap.set("n", "<tab>", "<c-6>")
+
+-- Buffers and Windows
+vim.keymap.set("n", "<a-b>", "<c-6>")
+vim.keymap.set("n", "<a-c>", "<cmd>bd<cr>")
+vim.keymap.set("n", "<a-d>", "<cmd>bw<cr>")
+vim.keymap.set("n", "<a-w>", "<c-w>w")
+vim.keymap.set("n", "<a-h>", "<c-w>h")
+vim.keymap.set("n", "<a-j>", "<c-w>j")
+vim.keymap.set("n", "<a-k>", "<c-w>k")
+vim.keymap.set("n", "<a-l>", "<c-w>l")
+vim.keymap.set("n", "<a-q>", "<c-w>q")
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
