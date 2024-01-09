@@ -272,6 +272,10 @@ require("telescope").setup({
                 mirror = true,
             },
         },
+        buffers = {
+            initial_mode = "normal",
+            sort_lastused = true,
+        },
     },
 })
 
@@ -360,6 +364,8 @@ vim.keymap.set("n", "<leader>ss", require("telescope.builtin").live_grep, { desc
 vim.keymap.set("n", "<leader>sb", require("telescope.builtin").current_buffer_fuzzy_find, { desc = "buffer" })
 vim.keymap.set("n", "<leader>so", telescope_live_grep_open_files, { desc = "open" })
 vim.keymap.set("n", "<leader>sg", ":LiveGrepGitRoot<cr>", { desc = "git root" })
+-- Buffer
+vim.keymap.set("n", "<tab>", "<c-6>")
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
