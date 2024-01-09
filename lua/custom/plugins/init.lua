@@ -1,5 +1,12 @@
 return {
     {
+        "m4xshen/autoclose.nvim",
+        config = function()
+            require("autoclose").setup()
+        end,
+    },
+
+    {
         "folke/noice.nvim",
         event = "VeryLazy",
         dependencies = {
