@@ -245,6 +245,15 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     pattern = "*",
 })
 
+local toggle_highlight = function()
+    if not vim.o.hlsearch then
+        vim.o.hlsearch = true
+    else
+        vim.o.hlsearch = false
+    end
+end
+vim.keymap.set("n", "<leader>h", toggle_highlight)
+
 -- [[ Configure Telescope ]]
 require("telescope").setup({
     defaults = {
@@ -516,6 +525,7 @@ require("which-key").register({
     ["<leader>g"] = { name = "git", _ = "which_key_ignore" },
     ["<leader>f"] = { name = "find", _ = "which_key_ignore" },
     ["<leader>s"] = { name = "search", _ = "which_key_ignore" },
+    ["<leader>h"] = { name = "highlight toggle", _ = "which_key_ignore" },
     ["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
     ["<leader>d"] = { name = "[D]ocument", _ = "which_key_ignore" },
     ["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
