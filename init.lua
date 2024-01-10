@@ -258,6 +258,8 @@ vim.keymap.set("n", "<leader>h", toggle_highlight)
 vim.api.nvim_set_hl(0, "IlluminatedWordText", { bold = true, underline = true })
 vim.api.nvim_set_hl(0, "IlluminatedWordRead", { bold = true, underline = true })
 vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { bold = true, underline = true })
+-- for ts @Decorator
+vim.api.nvim_set_hl(0, "@attribute.typescript", { link = "@operator" })
 
 -- [[ Configure Telescope ]]
 require("telescope").setup({
@@ -416,10 +418,7 @@ vim.defer_fn(function()
         sync_install = false,
         ignore_install = {},
         modules = {},
-
-        -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
         auto_install = false,
-
         highlight = { enable = true },
         indent = { enable = true },
         incremental_selection = {
