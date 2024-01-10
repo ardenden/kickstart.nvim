@@ -113,4 +113,6 @@ return {
             })
         end,
     },
+
+    { "matze/vim-move" },
 }
