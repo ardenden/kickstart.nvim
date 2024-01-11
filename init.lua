@@ -254,7 +254,7 @@ local toggle_highlight = function()
         vim.o.hlsearch = false
     end
 end
-vim.keymap.set("n", "<leader>h", toggle_highlight)
+vim.keymap.set("n", "<leader>h", toggle_highlight, { desc = "highlight toggle" })
 vim.api.nvim_set_hl(0, "IlluminatedWordText", { bold = true, underline = true })
 vim.api.nvim_set_hl(0, "IlluminatedWordRead", { bold = true, underline = true })
 vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { bold = true, underline = true })
@@ -505,7 +505,6 @@ require("which-key").register({
     ["<leader>g"] = { name = "git", _ = "which_key_ignore" },
     ["<leader>f"] = { name = "find", _ = "which_key_ignore" },
     ["<leader>s"] = { name = "search", _ = "which_key_ignore" },
-    ["<leader>h"] = { name = "highlight toggle", _ = "which_key_ignore" },
     ["<leader>l"] = { name = "lsp", _ = "which_key_ignore" },
     ["<leader>w"] = { name = "workspace", _ = "which_key_ignore" },
     ["<leader>d"] = { name = "diagnostics", _ = "which_key_ignore" },
