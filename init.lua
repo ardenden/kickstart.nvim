@@ -617,5 +617,23 @@ cmp.setup({
     },
 })
 
+-- folding
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.opt.foldenable = false
+-- vim.wo.foldnestmax = 1
+-- vim.wo.foldminlines = 1
+vim.opt.foldlevelstart = 99
+vim.wo.foldlevel = 99
+-- preserve folds
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+    pattern = { "*" },
+    command = "normal zx",
+})
+vim.cmd([[
+  autocmd BufLeave *.* mkview
+  autocmd BufEnter *.* silent! loadview
+]])
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
