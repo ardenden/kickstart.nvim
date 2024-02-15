@@ -45,7 +45,18 @@ require("lazy").setup({
         "hrsh7th/nvim-cmp",
         dependencies = {
             -- Snippet Engine & its associated nvim-cmp source
-            "L3MON4D3/LuaSnip",
+            {
+                "L3MON4D3/LuaSnip",
+                build = (function()
+                    -- Build Step is needed for regex support in snippets
+                    -- This step is not supported in many windows environments
+                    -- Remove the below condition to re-enable on windows
+                    if vim.fn.has("win32") == 1 then
+                        return
+                    end
+                    return "make install_jsregexp"
+                end)(),
+            },
             "saadparwaiz1/cmp_luasnip",
 
             -- Adds LSP completion capabilities
@@ -487,7 +498,9 @@ local on_attach = function()
     vim.keymap.set("n", "<leader>ld", require("telescope.builtin").lsp_type_definitions, { desc = "type definition" })
     vim.keymap.set("n", "<leader>ls", require("telescope.builtin").lsp_document_symbols, { desc = "document symbols" })
     vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "rename" })
-    vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "action" })
+    vim.keymap.set("n", "<leader>la", function()
+        vim.lsp.buf.code_action({ context = { only = { "quickfix", "refactor", "source" } } })
+    end, { desc = "action" })
 
     vim.keymap.set("n", "<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, { desc = "symbols" })
     vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, { desc = "add folder" })
