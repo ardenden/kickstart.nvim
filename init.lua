@@ -249,7 +249,29 @@ require("lazy").setup({
     },
 
     -- Useful plugin to show you pending keybinds.
-    { "folke/which-key.nvim", opts = {} },
+    {
+        "folke/which-key.nvim",
+        event = "VimEnter", -- Sets the loading event to 'VimEnter'
+        config = function() -- This is the function that runs, AFTER loading
+            require("which-key").setup({
+                preset = "helix",
+            })
+
+            -- document existing key chains
+            require("which-key").add({
+                { "<leader>g", group = "git" },
+                { "<leader>f", group = "find" },
+                { "<leader>s", group = "search" },
+                { "<leader>l", group = "lsp" },
+                { "<leader>w", group = "workspace" },
+                { "<leader>d", group = "diagnostics" },
+
+                { "<leader>", name = "NORMAL", mode = "n" },
+                { "<leader>", name = "VISUAL", mode = "v" },
+                { "<leader>g", group = "git", mode = "v" },
+            })
+        end,
+    },
 
     {
         "nvim-lualine/lualine.nvim",
@@ -454,22 +476,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- for ts @Decorator
 vim.api.nvim_set_hl(0, "@attribute.typescript", { link = "@operator" })
-
--- document existing key chains
-require("which-key").register({
-    ["<leader>g"] = { name = "git", _ = "which_key_ignore" },
-    ["<leader>f"] = { name = "find", _ = "which_key_ignore" },
-    ["<leader>s"] = { name = "search", _ = "which_key_ignore" },
-    ["<leader>l"] = { name = "lsp", _ = "which_key_ignore" },
-    ["<leader>w"] = { name = "workspace", _ = "which_key_ignore" },
-    ["<leader>d"] = { name = "diagnostics", _ = "which_key_ignore" },
-})
-
--- register which-key VISUAL mode
-require("which-key").register({
-    ["<leader>"] = { name = "VISUAL <leader>" },
-    ["<leader>g"] = { "hunk" },
-}, { mode = "v" })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
