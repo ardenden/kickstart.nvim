@@ -6,7 +6,9 @@ return {
                 lua = { "stylua" },
                 javascript = { { "prettierd", "prettier" } },
                 typescript = { { "prettierd", "prettier" } },
+                json = { { "prettierd", "prettier" } },
                 go = { "gofumpt" },
+                rust = { "rustfmt" },
             },
         })
         vim.api.nvim_create_autocmd("BufWritePre", {
