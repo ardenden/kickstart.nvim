@@ -21,6 +21,7 @@
   "move.nvim": { "branch": "main", "commit": "cccbd4ea9049ca5f99f025ffaddb7392359c7d6a" },
   "neodev.nvim": { "branch": "main", "commit": "46aa467dca16cf3dfe27098042402066d2ae242d" },
   "neogit": { "branch": "master", "commit": "a86e673da36f8631385b36de42240bb37568b510" },
+  "no-clown-fiesta.nvim": { "branch": "master", "commit": "b63937a5ebba1ece32f56256c46d166e62aca7fc" },
   "noice.nvim": { "branch": "main", "commit": "dd7363eae290ecdb9d6a2db6e0f59527df79edd6" },
   "nui.nvim": { "branch": "main", "commit": "61574ce6e60c815b0a0c4b5655b8486ba58089a1" },
   "nvim-cmp": { "branch": "main", "commit": "d818fd0624205b34e14888358037fb6f5dc51234" },
@@ -42,6 +43,5 @@
   "vim-illuminate": { "branch": "master", "commit": "5eeb7951fc630682c322e88a9bbdae5c224ff0aa" },
   "vim-sleuth": { "branch": "master", "commit": "1cc4557420f215d02c4d2645a748a816c220e99b" },
   "vim-visual-multi": { "branch": "master", "commit": "38b0e8d94a5499ccc17d6159763d32c79f53417b" },
-  "vscode.nvim": { "branch": "main", "commit": "3ba16d763097cecc75eb93761f4a981467acfc23" },
   "which-key.nvim": { "branch": "main", "commit": "650f298f516018ad7ebce6d957e015d5db434f3c" }
 }
